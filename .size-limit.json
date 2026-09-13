@@ -1,0 +1,4 @@
+[
+  { "name": "core (esm, gzip)", "path": "dist/index.js", "limit": "3.5 kB" },
+  { "name": "react (esm, gzip)", "path": "dist/react.js", "limit": "5 kB", "ignore": ["react", "react-dom"] }
+]

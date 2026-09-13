@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>auto-skeleton playground</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 32px;
+        background: Canvas;
+        color: CanvasText;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 4px;
+      }
+      .muted {
+        color: GrayText;
+        margin: 0 0 24px;
+      }
+      .controls {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+        align-items: start;
+      }
+      .demo {
+        border: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .demo h2 {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: GrayText;
+        margin: 0 0 12px;
+      }
+      button.primary {
+        background: #2563eb;
+        color: white;
+        border: 0;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font: inherit;
+      }
+      button.secondary {
+        background: transparent;
+        border: 1px solid color-mix(in srgb, CanvasText 25%, transparent);
+        padding: 8px 16px;
+        border-radius: 6px;
+        font: inherit;
+        color: inherit;
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        flex: none;
+      }
+      .badge {
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #166534;
+        font-size: 12px;
+      }
+      .cover {
+        display: block;
+        width: 100%;
+        height: 120px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #60a5fa, #a78bfa);
+        margin-top: 12px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 8px 6px;
+        border-bottom: 1px solid color-mix(in srgb, CanvasText 10%, transparent);
+      }
+      .chip {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: color-mix(in srgb, CanvasText 8%, transparent);
+        font-size: 13px;
+        margin: 0 6px 6px 0;
+      }
+      pre {
+        font-size: 12px;
+        overflow: auto;
+        background: color-mix(in srgb, CanvasText 6%, transparent);
+        padding: 12px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

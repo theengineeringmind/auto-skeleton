@@ -1,0 +1,128 @@
+{
+  "name": "auto-skeleton",
+  "version": "0.1.0",
+  "description": "Auto-generated loading skeletons measured from your real UI. Zero hand-written skeleton components.",
+  "keywords": [
+    "skeleton",
+    "loading",
+    "placeholder",
+    "shimmer",
+    "react",
+    "ui",
+    "auto"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Midhun",
+    "email": "midhun.2k18@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theengineeringmind/auto-skeleton.git"
+  },
+  "homepage": "https://github.com/theengineeringmind/auto-skeleton#readme",
+  "bugs": {
+    "url": "https://github.com/theengineeringmind/auto-skeleton/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/react.d.ts",
+        "default": "./dist/react.js"
+      },
+      "require": {
+        "types": "./dist/react.d.cts",
+        "default": "./dist/react.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run --project unit",
+    "test:browser": "vitest run --project browser",
+    "test:all": "vitest run",
+    "test:watch": "vitest",
+    "size": "size-limit",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test:all && pnpm build && pnpm size",
+    "playground": "vite playground",
+    "prepublishOnly": "pnpm check"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@11.5.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@size-limit/preset-small-lib": "^13.1.1",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/browser": "^5.0.0",
+    "@vitest/browser-playwright": "5.0.0",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "^30.0.1",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "size-limit": "^13.1.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.0",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.0",
+    "vitest-browser-react": "^2.3.0"
+  },
+  "typesVersions": {
+    "*": {
+      "react": [
+        "./dist/react.d.ts"
+      ]
+    }
+  }
+}
