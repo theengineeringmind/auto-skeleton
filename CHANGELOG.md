@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- Releases are published from GitHub Actions through npm trusted publishing with provenance. No token is stored.
+- Playground imports the package by its published name.
+- No library code changes.
+
 ## 0.1.0
 
 Initial release.
