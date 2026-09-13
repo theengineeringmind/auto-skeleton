@@ -53,6 +53,18 @@ jobs:
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
+      # Print the identity npm will check against the trusted publisher entry.
+      # Nothing here is secret; the token itself is never printed.
+      - name: Show OIDC identity claims
+        if: steps.published.outputs.exists == 'false'
+        run: |
+          TOKEN=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=npm:registry.npmjs.org" | node -p "JSON.parse(require('fs').readFileSync(0,'utf8')).value")
+          node -e '
+            const claims = JSON.parse(Buffer.from(process.argv[1].split(".")[1], "base64url").toString());
+            for (const k of ["repository_owner","repository","workflow_ref","job_workflow_ref","environment","ref","event_name"]) console.log(k.padEnd(18), claims[k] ?? "(none)");
+          ' "$TOKEN"
+
       # Trusted publishing needs npm 11.5.1 or newer; Node 22 ships an older npm.
       - name: Update npm
         if: steps.published.outputs.exists == 'false'
