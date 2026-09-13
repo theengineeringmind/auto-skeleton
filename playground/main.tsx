@@ -1,6 +1,10 @@
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { AutoSkeleton, AutoSkeletonProvider, type SkeletonLayout } from '../src/react';
+import {
+  AutoSkeleton,
+  AutoSkeletonProvider,
+  type SkeletonLayout,
+} from '@theengineeringmind/auto-skeleton/react';
 
 const user = {
   name: 'Ada Lovelace',

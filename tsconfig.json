@@ -16,7 +16,11 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "declaration": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@theengineeringmind/auto-skeleton": ["./src/index.ts"],
+      "@theengineeringmind/auto-skeleton/react": ["./src/react.ts"]
+    }
   },
   "include": ["src", "tests", "playground", "*.ts", "*.tsx"]
 }
