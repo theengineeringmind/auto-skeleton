@@ -74,4 +74,4 @@ jobs:
       # before anything is uploaded.
       - name: Publish
         if: steps.published.outputs.exists == 'false'
-        run: npm publish --access public
+        run: npm publish --access public --loglevel verbose 2>&1 | grep -viE "^npm (verb|sill) (title|argv|logfile|http fetch|cache)" || exit 1
