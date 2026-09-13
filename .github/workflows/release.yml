@@ -1,15 +1,28 @@
 name: Release
 
+# Publishes to npm via trusted publishing (OIDC). No npm token is stored in
+# this repository: npmjs.com is configured to trust this exact workflow file
+# in this repository, and the job exchanges its GitHub identity for a
+# short-lived publish credential. Provenance is attached automatically.
+#
+# One-time setup on npmjs.com (package settings → Publishing access →
+# Trusted publisher → GitHub Actions):
+#   organization or user: theengineeringmind
+#   repository:           auto-skeleton
+#   workflow filename:    release.yml
+#   environment:          (leave blank)
+
 on:
   push:
     tags: ['v*']
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -17,10 +30,17 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm check
+
+      - name: Check the tag matches package.json
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "v$VERSION" != "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match package.json version $VERSION" >&2
+            exit 1
+          fi
+
       - name: Skip if this version is already on npm
         id: published
         run: |
@@ -32,7 +52,14 @@ jobs:
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
-      - run: pnpm publish --no-git-checks --provenance --access public
+
+      # Trusted publishing needs npm 11.5.1 or newer; Node 22 ships an older npm.
+      - name: Update npm
         if: steps.published.outputs.exists == 'false'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm install -g npm@latest && npm --version
+
+      # `prepublishOnly` runs `pnpm check` (typecheck, lint, tests, build, size)
+      # before anything is uploaded.
+      - name: Publish
+        if: steps.published.outputs.exists == 'false'
+        run: npm publish --access public

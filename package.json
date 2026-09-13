@@ -87,7 +87,8 @@
     "size": "size-limit",
     "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test:all && pnpm build && pnpm size",
     "playground": "vite playground",
-    "prepublishOnly": "pnpm check"
+    "prepublishOnly": "pnpm check",
+    "preversion": "pnpm check"
   },
   "peerDependencies": {
     "react": ">=18",
