@@ -1,6 +1,6 @@
 {
   "name": "@theengineeringmind/auto-skeleton",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Automatic skeleton loading screens measured from your real UI. React skeleton component and vanilla JS core with shimmer, SSR and Next.js support. No hand-written skeleton components.",
   "keywords": [
     "skeleton",
