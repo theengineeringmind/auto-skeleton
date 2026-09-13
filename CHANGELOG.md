@@ -9,6 +9,7 @@ Initial release.
 - `<AutoSkeleton>` React component with cross-fade, resize re-measurement, layout cache, and SSR support.
 - Coherent shimmer sweep across all blocks, respects `prefers-reduced-motion`.
 - `data-auto-skeleton="skip|block|descend"` and a `classify` callback for overrides.
+- Decorated elements that are empty (CSS images, dividers) or short and text-only (chips, badges) are painted as single blocks.
 - `AutoSkeletonProvider` for app-wide defaults: theme, cache, measure options, and server-shipped `layouts`.
 - `layout` prop and provider `layouts` render real blocks on the server with no client measurement.
 - Theme props `color`, `highlight`, `duration`, `fade` on components, provider, and the DOM renderer.

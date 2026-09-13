@@ -1,15 +1,31 @@
 {
   "name": "auto-skeleton",
   "version": "0.1.0",
-  "description": "Auto-generated loading skeletons measured from your real UI. Zero hand-written skeleton components.",
+  "description": "Automatic skeleton loading screens measured from your real UI. React skeleton component and vanilla JS core with shimmer, SSR and Next.js support. No hand-written skeleton components.",
   "keywords": [
     "skeleton",
+    "skeleton-loader",
+    "skeleton-screen",
+    "skeleton-loading",
+    "loading-skeleton",
+    "react-skeleton",
+    "react-loading-skeleton",
+    "content-loader",
     "loading",
+    "loading-placeholder",
     "placeholder",
     "shimmer",
+    "suspense",
+    "fallback",
     "react",
+    "react-component",
+    "nextjs",
+    "ssr",
+    "server-components",
+    "typescript",
     "ui",
-    "auto"
+    "accessibility",
+    "a11y"
   ],
   "license": "MIT",
   "author": {

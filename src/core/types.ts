@@ -39,9 +39,12 @@ export interface MeasureOptions {
   /** Blocks smaller than this in either dimension (px) are dropped. Default `2`. */
   minSize?: number;
   /**
-   * Elements with a visible background or border that are at most this many
-   * pixels in both dimensions are painted as a single block (avatars, badges,
-   * icons). Larger ones are descended into. Default `64`.
+   * Size threshold (px) for treating a decorated element (visible background
+   * or border) as one block instead of a container. Elements at most this
+   * size in both dimensions are blocks (avatars, icons); text-only elements
+   * at most this tall and four times this wide are blocks (badges, chips,
+   * pills); empty decorated elements are blocks at any size (CSS images,
+   * dividers). Everything else is descended into. Default `64`.
    */
   maxBackgroundBlock?: number;
   /**

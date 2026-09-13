@@ -127,6 +127,22 @@ describe('measure in a real browser', () => {
     expect(layout.blocks[0]).toMatchObject({ height: 30, width: 300 });
   });
 
+  it('paints CSS-only visuals and chips as single blocks', () => {
+    const el = mount(
+      `<div style="width: 320px; font: 14px/20px sans-serif;">
+        <div class="cover" style="height: 90px; background: linear-gradient(#000, #fff);"></div>
+        <div style="display: flex; gap: 6px; margin-top: 8px;">
+          <span style="padding: 4px 10px; background: #eee; border-radius: 6px;">mathematics</span>
+          <span style="padding: 4px 10px; background: #eee; border-radius: 6px;">poetry</span>
+        </div>
+      </div>`,
+    );
+    const layout = measure(el);
+    expect(layout.blocks.map((b) => b.kind)).toEqual(['box', 'box', 'box']);
+    expect(layout.blocks[0]).toMatchObject({ x: 0, y: 0, width: 320, height: 90 });
+    expect(layout.blocks[1]!.radius).toBe('6px');
+  });
+
   it('measures a root that is itself media', () => {
     const img = mount('<img alt="" width="64" height="48" style="border-radius: 4px; display:block">');
     expect(measure(img).blocks).toEqual([

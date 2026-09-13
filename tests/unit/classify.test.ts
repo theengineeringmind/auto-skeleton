@@ -93,6 +93,27 @@ describe('classify built-in rules', () => {
     expect(classify(bordered, window, opts)).toBe('block');
   });
 
+  it('treats an empty decorated element as a block at any size', () => {
+    const cover = el('<div style="background:linear-gradient(red, blue)"></div>');
+    cover.getBoundingClientRect = () => ({ width: 600, height: 300 }) as DOMRect;
+    expect(classify(cover, window, opts)).toBe('block');
+    const spaced = el('<div style="background:red">   \n  </div>');
+    spaced.getBoundingClientRect = () => ({ width: 600, height: 300 }) as DOMRect;
+    expect(classify(spaced, window, opts)).toBe('block');
+  });
+
+  it('treats a short, text-only decorated element as a block (chips, badges)', () => {
+    const chip = el('<span style="background:red">mathematics</span>');
+    chip.getBoundingClientRect = () => ({ width: 120, height: 28 }) as DOMRect;
+    expect(classify(chip, window, opts)).toBe('block');
+    const wide = el('<span style="background:red">a very long single line label</span>');
+    wide.getBoundingClientRect = () => ({ width: 400, height: 28 }) as DOMRect;
+    expect(classify(wide, window, opts)).toBe('descend');
+    const nested = el('<div style="background:red"><b>x</b></div>');
+    nested.getBoundingClientRect = () => ({ width: 120, height: 28 }) as DOMRect;
+    expect(classify(nested, window, opts)).toBe('descend');
+  });
+
   it('ignores transparent backgrounds', () => {
     const span = el('<span style="background-color: rgba(0, 0, 0, 0)">x</span>');
     span.getBoundingClientRect = () => ({ width: 24, height: 24 }) as DOMRect;

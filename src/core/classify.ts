@@ -36,6 +36,11 @@ function hasVisibleBorder(style: CSSStyleDeclaration): boolean {
   return widths.some((w) => Number.parseFloat(w) > 0) && style.borderTopStyle !== 'none';
 }
 
+function isEmptyLeaf(element: Element): boolean {
+  if (element.childElementCount > 0) return false;
+  return !(element.textContent ?? '').trim();
+}
+
 export function kindOf(element: Element): BlockKind {
   const tag = element.localName;
   if (MEDIA.has(tag) || element.getAttribute('role') === 'img') return 'media';
@@ -93,8 +98,16 @@ export function classify(
   const decorated =
     style.backgroundImage !== 'none' || !isTransparent(style.backgroundColor) || hasVisibleBorder(style);
   if (decorated) {
+    // A decorated element with nothing inside is pure visual (a CSS-only
+    // image, gradient, divider or placeholder) and is painted whole.
+    if (isEmptyLeaf(element)) return 'block';
+    // A decorated element no taller than a line or two with only text inside
+    // is a chip, badge, tag or pill: one shape, not a text bar.
     const rect = element.getBoundingClientRect();
-    if (rect.width <= options.maxBackgroundBlock && rect.height <= options.maxBackgroundBlock) return 'block';
+    if (rect.height <= options.maxBackgroundBlock) {
+      if (rect.width <= options.maxBackgroundBlock) return 'block';
+      if (rect.width <= options.maxBackgroundBlock * 4 && element.childElementCount === 0) return 'block';
+    }
   }
   return 'descend';
 }
