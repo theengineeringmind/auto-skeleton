@@ -177,7 +177,7 @@ function App() {
             <Article />
           </Demo>
           <Demo title="Code" loading={loading}>
-            <pre>{`import { AutoSkeleton } from 'auto-skeleton/react';
+            <pre>{`import { AutoSkeleton } from '@theengineeringmind/auto-skeleton/react';
 
 <AutoSkeletonProvider color="#8884" highlight="#8888">
   <AutoSkeleton loading={isLoading} cacheKey="profile">

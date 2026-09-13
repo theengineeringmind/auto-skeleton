@@ -2,17 +2,17 @@
 
 **Automatic skeleton loading screens for React and vanilla JavaScript.** auto-skeleton measures your real component and generates a pixel-accurate skeleton loader with shimmer. No hand-written skeleton components, no drift when your design changes, server-side rendering and Next.js ready, under 3 kB.
 
-[![npm version](https://img.shields.io/npm/v/auto-skeleton?color=3b82f6)](https://www.npmjs.com/package/auto-skeleton)
-[![npm downloads](https://img.shields.io/npm/dm/auto-skeleton)](https://www.npmjs.com/package/auto-skeleton)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/auto-skeleton?label=core%20size)](https://bundlephobia.com/package/auto-skeleton)
+[![npm version](https://img.shields.io/npm/v/@theengineeringmind/auto-skeleton?color=3b82f6)](https://www.npmjs.com/package/@theengineeringmind/auto-skeleton)
+[![npm downloads](https://img.shields.io/npm/dm/@theengineeringmind/auto-skeleton)](https://www.npmjs.com/package/@theengineeringmind/auto-skeleton)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@theengineeringmind/auto-skeleton?label=core%20size)](https://bundlephobia.com/package/@theengineeringmind/auto-skeleton)
 [![CI](https://github.com/theengineeringmind/auto-skeleton/actions/workflows/ci.yml/badge.svg)](https://github.com/theengineeringmind/auto-skeleton/actions/workflows/ci.yml)
-[![types](https://img.shields.io/npm/types/auto-skeleton)](https://www.npmjs.com/package/auto-skeleton)
-[![license](https://img.shields.io/npm/l/auto-skeleton)](./LICENSE)
+[![types](https://img.shields.io/npm/types/@theengineeringmind/auto-skeleton)](https://www.npmjs.com/package/@theengineeringmind/auto-skeleton)
+[![license](https://img.shields.io/npm/l/@theengineeringmind/auto-skeleton)](./LICENSE)
 
 ![A profile card next to the skeleton loader auto-skeleton generated from it](https://raw.githubusercontent.com/theengineeringmind/auto-skeleton/main/docs/hero.png)
 
 ```tsx
-import { AutoSkeleton } from 'auto-skeleton/react';
+import { AutoSkeleton } from '@theengineeringmind/auto-skeleton/react';
 
 <AutoSkeleton loading={isLoading}>
   <ProfileCard user={user} />
@@ -34,23 +34,23 @@ That is the whole integration. Text lines, avatars, images, buttons, badges and 
 ## Install
 
 ```bash
-npm install auto-skeleton
+npm install @theengineeringmind/auto-skeleton
 ```
 
 ```bash
-pnpm add auto-skeleton
+pnpm add @theengineeringmind/auto-skeleton
 ```
 
 ```bash
-yarn add auto-skeleton
+yarn add @theengineeringmind/auto-skeleton
 ```
 
-React 18 or 19 is an optional peer dependency, only needed for `auto-skeleton/react`.
+React 18 or 19 is an optional peer dependency, only needed for `@theengineeringmind/auto-skeleton/react`.
 
 ## Quick start with React
 
 ```tsx
-import { AutoSkeleton, AutoSkeletonProvider } from 'auto-skeleton/react';
+import { AutoSkeleton, AutoSkeletonProvider } from '@theengineeringmind/auto-skeleton/react';
 
 // Once, near the root of the app. Every prop is optional.
 export function App() {
@@ -86,11 +86,11 @@ While `loading` is true the component paints the best layout it already knows (a
 
 ### With Next.js App Router
 
-`auto-skeleton/react` is a client component boundary, so it can be imported directly from a Server Component. Use it in `loading.tsx` or around any client data fetch:
+`@theengineeringmind/auto-skeleton/react` is a client component boundary, so it can be imported directly from a Server Component. Use it in `loading.tsx` or around any client data fetch:
 
 ```tsx
 // app/profile/[id]/loading.tsx
-import { AutoSkeleton } from 'auto-skeleton/react';
+import { AutoSkeleton } from '@theengineeringmind/auto-skeleton/react';
 import { ProfileCard } from '@/components/profile-card';
 import layouts from '@/skeleton-layouts.json';
 
@@ -104,7 +104,7 @@ With a `layout` the server renders the actual blocks, so the skeleton is in the 
 ## Quick start with vanilla JavaScript
 
 ```ts
-import { createSkeleton, measure, renderSkeleton } from 'auto-skeleton';
+import { createSkeleton, measure, renderSkeleton } from '@theengineeringmind/auto-skeleton';
 
 const handle = createSkeleton(document.querySelector('.card'), { color: '#e5e7eb', highlight: '#f3f4f6' });
 container.replaceChildren(handle.element);
@@ -202,7 +202,7 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 await page.goto('http://localhost:6006/iframe.html?id=profile-card--default');
 const layouts = await page.evaluate(async () => {
-  const { measure } = await import('auto-skeleton');
+  const { measure } = await import('@theengineeringmind/auto-skeleton');
   return { profile: measure(document.querySelector('.profile-card')) };
 });
 await fs.writeFile('src/skeleton-layouts.json', JSON.stringify(layouts));
