@@ -1,5 +1,6 @@
+/// <reference types="vite/client" />
 import { StrictMode, useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, type Root } from 'react-dom/client';
 import {
   AutoSkeleton,
   AutoSkeletonProvider,
@@ -195,7 +196,12 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')!).render(
+// Reuse the React root across Vite hot updates of this entry file.
+const container = document.getElementById('root')!;
+const hotData = import.meta.hot?.data as { root?: Root } | undefined;
+const root = hotData?.root ?? createRoot(container);
+if (hotData) hotData.root = root;
+root.render(
   <StrictMode>
     <App />
   </StrictMode>,
