@@ -20,7 +20,7 @@ Two details on that form that break publishing if wrong:
 
 When no entry exists on the package at all, the workflow log shows "OIDC token exchange error - package not found".
 
-Optionally set "Require two-factor authentication and disallow tokens" under Publishing access so only the workflow (and a human with 2FA) can publish.
+Publishing access is set to "Require two-factor authentication and disallow tokens", so only this workflow or a maintainer entering a 2FA code can publish. Token-based publishing is refused by design.
 
 ## Cutting a release
 
