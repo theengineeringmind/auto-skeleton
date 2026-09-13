@@ -20,6 +20,9 @@ export default defineConfig({
             headless: true,
             provider: playwright(),
             instances: [{ browser: 'chromium' }],
+            // Desktop-sized default so media queries start in their wide state;
+            // responsive tests resize the viewport explicitly.
+            viewport: { width: 1280, height: 800 },
             screenshotFailures: false,
           },
         },
