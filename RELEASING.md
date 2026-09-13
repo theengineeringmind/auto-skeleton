@@ -13,6 +13,13 @@ On npmjs.com, open the package → Settings → Publishing access → Trusted pu
 | Workflow filename    | `release.yml`        |
 | Environment name     | leave blank          |
 
+Two details on that form that break publishing if wrong:
+
+- **Environment name must be truly empty.** Typing `none` makes npm require a GitHub environment called "none", and the workflow's identity has no environment, so npm answers "OIDC permission denied".
+- **Tick "Allow npm publish".** Without it a trusted publisher may only run `npm stage publish`, and a direct `npm publish` is refused with the same "permission denied" error.
+
+When no entry exists on the package at all, the workflow log shows "OIDC token exchange error - package not found".
+
 Optionally set "Require two-factor authentication and disallow tokens" under Publishing access so only the workflow (and a human with 2FA) can publish.
 
 ## Cutting a release
